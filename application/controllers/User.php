@@ -6,7 +6,7 @@ class User extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        error_reporting(0);
+        error_reporting(1);
         $this->load->model('M_menu');
     }
 

@@ -34,6 +34,7 @@
                                     <th>Deskripsi Foto</th>
                                     <th>Posted At</th>
                                     <th>Foto</th>
+									<th>album</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -48,7 +49,8 @@
                                         <td class="text-left"><?= $f['deskripsi_foto']; ?></td>
                                         <td><?= date('d F Y', strtotime($f['tanggal_unggah'])); ?></td>
                                         <td><img src="<?= base_url($f['lokasi_file']) ; ?>" alt="" width="150px"></td>
-                                        <td width="100px">
+                                        <td><?= $f['nama_album']; ?></td>
+										<td width="100px">
                                         <input type="hidden" data="" name="id" id="id" value="<?= $f['foto_id'] ?>">
                                             <a href="" data-toggle="modal" data-target="#changeFotoModal<?= $f['foto_id'] ?>" class="text-warning lg-1"><i class="far fa-fw fa-edit"></i></a>
                                             <a href="<?= base_url(); ?>user/deleteFoto/<?= $f['foto_id']; ?>" onclick="return confirm('Yakin hapus Foto <?= $u['judul_foto']; ?>?');" class="text-danger"><i class="far fa-fw fa-trash-alt"></i></a>

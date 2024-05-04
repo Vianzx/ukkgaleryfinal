@@ -57,8 +57,8 @@
                                             <a href="<?= base_url(); ?>user/deleteAlbum/<?= $a['id']; ?>" onclick="return confirm('Yakin hapus data <?= $a['nama_album']; ?>?');" class="btn btn-danger"><i class="far fa-fw fa-trash-alt"></i></a>
                                         </td>   
                                     </tr>
-                                    <?php endif ; ?>
                                     <?php $no++; ?>
+                                    <?php endif ; ?>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>

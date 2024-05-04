@@ -26,7 +26,7 @@ class M_menu extends CI_Model
 	public function getFoto($id = false)
     {
         if ($id) {
-            $query = "SELECT foto.*, foto.id as foto_id, user.username, album.id
+            $query = "SELECT foto.*, foto.id as foto_id, user.username, album.id, album.nama_album
                   FROM foto JOIN user
                   ON foto.user_id = user.id
                   JOIN album
@@ -35,7 +35,7 @@ class M_menu extends CI_Model
                   ORDER BY tanggal_unggah DESC
                 ";
         } else {
-            $query = "SELECT foto.*, foto.id as foto_id, user.username, album.id
+            $query = "SELECT foto.*, foto.id as foto_id, user.username, album.id,album.nama_album
                   FROM foto JOIN user
                   ON foto.user_id = user.id
                   JOIN album

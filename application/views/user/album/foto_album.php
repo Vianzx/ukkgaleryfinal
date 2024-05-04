@@ -51,7 +51,7 @@
                                         <td><img src="<?= base_url($f['lokasi_file']) ; ?>" alt="" width="150px"></td> 
                                     </tr>
                                     <?php $no++; ?>
-                                    <?php endif; ?>
+                                <?php endif; ?>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>

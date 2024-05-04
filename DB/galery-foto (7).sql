@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Mar 2024 pada 07.11
+-- Waktu pembuatan: 03 Bulan Mei 2024 pada 11.13
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.1.17
 
@@ -40,10 +40,9 @@ CREATE TABLE `album` (
 --
 
 INSERT INTO `album` (`id`, `nama_album`, `deskripsi`, `tanggal_buat`, `user_id`) VALUES
-(1, 'Album Pribadi', 'foto-foto sunset', '2024-02-19', 1),
-(3, 'try', 'apaiya', '2024-02-24', 1),
-(4, 'selfi2', 'selfi2', '2024-02-29', 1),
-(5, 'yii', 'higiip', '2455-02-12', 3);
+(10, 'new1', 'iedei', '2024-11-11', 8),
+(11, 'new', 'bagus', '2024-12-22', 8),
+(12, 'ttty', 'bagus cuyyy', '2024-02-22', 9);
 
 -- --------------------------------------------------------
 
@@ -66,10 +65,9 @@ CREATE TABLE `foto` (
 --
 
 INSERT INTO `foto` (`id`, `judul_foto`, `deskripsi_foto`, `tanggal_unggah`, `lokasi_file`, `album_id`, `user_id`) VALUES
-(20, 'fpejd', '222', '2024-02-29', './assets/img/photos/2024-02-29-08-30-10.jpg', 3, 1),
-(21, 'ur79r', 'utuf', '2024-02-29', './assets/img/photos/2024-02-29-08-31-27.png', 3, 1),
-(23, 'hug', 'kpib', '2024-03-01', './assets/img/photos/2024-03-01-08-20-45.png', 3, 3),
-(24, 'vhkv', 'ugufog', '2024-03-01', './assets/img/photos/2024-03-01-08-21-06.png', 4, 3);
+(26, 'ojan', 'ojan di pantai', '2024-05-03', './assets/img/photos/2024-05-03-09-44-41.png', 11, 8),
+(27, 'cok', 'guss', '2024-05-03', './assets/img/photos/2024-05-03-10-06-20.png', 12, 9),
+(29, 'judul', 'goof', '2024-05-03', './assets/img/photos/2024-05-03-10-47-57.png', 10, 8);
 
 -- --------------------------------------------------------
 
@@ -85,16 +83,6 @@ CREATE TABLE `komentarfoto` (
   `tanggal_komentar` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data untuk tabel `komentarfoto`
---
-
-INSERT INTO `komentarfoto` (`id`, `foto_id`, `user_id`, `isi_komentar`, `tanggal_komentar`) VALUES
-(1, 9, 1, 'Btw Udah keluar kah Animenya?', '2024-02-26'),
-(18, 18, 1, 'test', '2024-02-29'),
-(19, 23, 3, 'http://localhost/galeri-foto/user/tambahLike/23', '2024-03-01'),
-(20, 23, 3, 'fyff', '2024-03-01');
-
 -- --------------------------------------------------------
 
 --
@@ -107,13 +95,6 @@ CREATE TABLE `likefoto` (
   `user_id` int(11) NOT NULL,
   `tanggal_like` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `likefoto`
---
-
-INSERT INTO `likefoto` (`id`, `foto_id`, `user_id`, `tanggal_like`) VALUES
-(23, 23, 3, '2024-03-01');
 
 -- --------------------------------------------------------
 
@@ -135,9 +116,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `email`, `nama_lengkap`, `alamat`) VALUES
-(1, 'fattah', '$2y$10$iV4RFYgzSncSgiAH/VPkSO9F8U2C..Lnfpy.ljTutvpQUJAlJ1WL.', 'fattah979@gmail.com', 'Abdullah Fattah', 'Kecapi Kota Cirebon'),
-(2, 'dika', '$2y$10$nLDPAGiYm.TVVsbqKUJ7munRl8cU2SyDhSg1L1PcOTE8o2FfpCtRK', 'nurana979@gmail.com', 'Andhika Pratama', 'Jagasatru Kota Cirebon'),
-(3, 'vian', '$2y$10$SvYB57XqtPBckYKuo4mw1eUDkEVBxtJIg4x20Az0g0MciJBr8uEIK', 'vian11@gmail.com', 'alvian Azzahra', 'Gunung Jati');
+(8, 'muhammad', '$2y$10$1obCYF8QZISZiREUkzDSg.diG/Lry4tVLybjyauAaGYEH3C/bM.aK', 'muhammad@gmail.com', 'muhammad', 'Semarang'),
+(9, 'agung', '$2y$10$KoZQRUZWuywhbiHU8Lmw4ur8GcUGki/ZqfPqb.Wl.OCJ2qlK9cfii', 'agung@gmail.com', 'agung', 'pekalipan');
 
 --
 -- Indexes for dumped tables
@@ -147,25 +127,32 @@ INSERT INTO `user` (`id`, `username`, `password`, `email`, `nama_lengkap`, `alam
 -- Indeks untuk tabel `album`
 --
 ALTER TABLE `album`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indeks untuk tabel `foto`
 --
 ALTER TABLE `foto`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `album_id` (`album_id`,`user_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indeks untuk tabel `komentarfoto`
 --
 ALTER TABLE `komentarfoto`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `foto_id` (`foto_id`,`user_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indeks untuk tabel `likefoto`
 --
 ALTER TABLE `likefoto`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `foto_id` (`foto_id`,`user_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indeks untuk tabel `user`
@@ -181,31 +168,62 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `album`
 --
 ALTER TABLE `album`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `foto`
 --
 ALTER TABLE `foto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT untuk tabel `komentarfoto`
 --
 ALTER TABLE `komentarfoto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT untuk tabel `likefoto`
 --
 ALTER TABLE `likefoto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `album`
+--
+ALTER TABLE `album`
+  ADD CONSTRAINT `album_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `foto`
+--
+ALTER TABLE `foto`
+  ADD CONSTRAINT `foto_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `foto_ibfk_2` FOREIGN KEY (`album_id`) REFERENCES `album` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `komentarfoto`
+--
+ALTER TABLE `komentarfoto`
+  ADD CONSTRAINT `komentarfoto_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `komentarfoto_ibfk_2` FOREIGN KEY (`foto_id`) REFERENCES `foto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `likefoto`
+--
+ALTER TABLE `likefoto`
+  ADD CONSTRAINT `likefoto_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `likefoto_ibfk_3` FOREIGN KEY (`foto_id`) REFERENCES `foto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
